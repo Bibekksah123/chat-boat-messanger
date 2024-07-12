@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body{
+      background-color: aquamarine;
+      position: absolute;
+      top: 20%;
+      left: 30%;
+    }
+    .chat-boat{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 400px;
+      width: 400px;
+      border: 1px solid transparent;
+      padding: 20px;
+      background: linear-gradient(blue, yellow);
+      box-shadow: 10px 10px 20px gray, -10px -10px 20px white;
+      overflow: hidden;
+    }
+    .chat-messages{
+      flex-grow: 1;
+      overflow-y: auto;
+    }
+    .chat p{
+      font-size: 30px;
+      font-weight: 500;
+      font-style: italic;
+    }
+    form{
+      display: flex;
+      gap: 10px;
+    }
+    form input{
+      border: none;
+      outline: none;
+      height: 25px;
+      flex-grow: 2;
+      padding: 0 10px;
+    }
+    form button{
+      height: 25px;
+      width: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-boat">
+    <div class="chat">
+      <p>Let Chat With Me</p>
+      <div class="chat-messages" id="chat-messages"></div>
+      <form id="chat-form">
+        <input type="text" placeholder="Type To Talk.." id="chat-input">
+        <button id="send" type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+  <script>
+    document.getElementById('chat-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const input = document.getElementById('chat-input');
+      const message = input.value.trim();
+      if (message !== '') {
+        const chatMessages = document.getElementById('chat-messages');
+        const messageElement = document.createElement('div');
+        messageElement.textContent = message;
+        chatMessages.appendChild(messageElement);
+        input.value = '';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
